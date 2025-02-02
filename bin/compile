@@ -7,6 +7,11 @@ set -o errexit    # always exit on error
 set -o pipefail   # don't ignore exit codes when piping output
 unset GIT_DIR     # Avoid GIT_DIR leak from previous build steps
 
+# Set the git config for github URLs
+git config --global url."https://github.com/".insteadOf git@github.com:
+#git config --global url."https://".insteadOf git://
+#git config --global url."https://".insteadOf ssh://
+
 [ "$BUILDPACK_XTRACE" ] && set -o xtrace
 
 ### Constants
