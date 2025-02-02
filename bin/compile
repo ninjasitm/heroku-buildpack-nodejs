@@ -22,12 +22,6 @@ CACHE_DIR=${2:-}
 ENV_DIR=${3:-}
 BP_DIR=$(cd "$(dirname "${0:-}")"; cd ..; pwd)
 
-header "Set the git config for github URLs" | output "$LOG_FILE"
-# Set the git config for github URLs
-git config --global url."https://github.com/".insteadOf git@github.com:
-git config --global url."https://github.com".insteadOf git://github.com
-#git config --global url."https://".insteadOf ssh://
-
 ### Load dependencies
 
 # shellcheck source=lib/vendor/stdlib_v7.sh
@@ -156,6 +150,12 @@ create_env() {
   write_profile "$BP_DIR" "$BUILD_DIR"
   write_export "$BP_DIR" "$BUILD_DIR"
 }
+
+header "Set the git config for github URLs" | output "$LOG_FILE"
+# Set the git config for github URLs
+git config --global url."https://github.com/".insteadOf git@github.com:
+git config --global url."https://github.com".insteadOf git://github.com
+#git config --global url."https://".insteadOf ssh://
 
 header "Creating runtime environment" | output "$LOG_FILE"
 
